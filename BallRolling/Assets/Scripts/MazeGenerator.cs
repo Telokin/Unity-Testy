@@ -5,14 +5,17 @@ public class MazeGenerator : MonoBehaviour
 {
     public string seed;
     public GameObject prefab;
+  //  public GameObject prefabend;
     public Vector2 mapSize = new Vector2(10, 10);
 
     Ceil[,] ceils;
+//    End[,] end;
     System.Random random;
 
     void Awake()
     {
         ceils = new Ceil[(int)(mapSize.x), (int)(mapSize.y)];
+    //    end = new Ceil[(int)(mapSize.x), (int)(mapSize.y)];
     }
 
     void Start()
@@ -28,10 +31,15 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int x = 0; x < mapSize.x; x++)
             {
+          //      int pierwszy = Random.Range(0, 10);
+          //      int drugi = Random.Range(0, 10);
                 GameObject newCeil = Instantiate(prefab, new Vector3(x, 0, y), Quaternion.identity) as GameObject;
+           //     GameObject endCeil = Instantiate(prefabEnd, new Vector3(x, 0, y), Quaternion.identity) as GameObject;
                 newCeil.name = string.Format("_Ceil({0},{1})", x, y);
+           //     newCeil.name = string.Format("_End({0},{1})", pierwszy, drugi);
                 newCeil.transform.parent = this.transform;
                 ceils[x, y] = newCeil.GetComponent<Ceil>();
+           //     end[pierwszy, drugi] = newCeil.GetComponent<End>();
             }
         }
     }
@@ -118,5 +126,6 @@ public class MazeGenerator : MonoBehaviour
             }
 
         }
+        
     }
 }

@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class BallGen : MonoBehaviour
 {
-	public GameObject[] Spawn;
-	public Transform spawnPos;
+	public string seed;
+	public Vector3 mapSize;
+	public GameObject player;
+	System.Random random;
+	int randomPos;
 
-	int randomInt =1;
 
 	void Start()
 	{
-		SpawnRandom();
-	}
-	// Update is called once per frame
-	void Update()
-	{
-
+		random = new System.Random((!string.IsNullOrEmpty(seed)) ? seed.GetHashCode() : System.Guid.NewGuid().GetHashCode());
+		SpawnBall();
 	}
 
-	void SpawnRandom()
+	void SpawnBall()
 	{
-		randomInt = Random.Range(0, Spawn.Length);
-		Instantiate(Spawn[randomInt], spawnPos.position, spawnPos.rotation);
+
+		randomPos = Random.Range(2,10);
+		Vector3 spawnBall = new Vector3(Random.Range(mapSize.x / 2, mapSize.x / 2),1, Random.Range(mapSize.z / 2, mapSize.z / 2));
+		Instantiate(player, spawnBall + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation);
 	}
 }
